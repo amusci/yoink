@@ -36,14 +36,13 @@ def startDownload(platform):
 # System Settings
 
 ctk.set_appearance_mode("System")
-ctk.set_default_color_theme("blue")
 
 # App Frame
 
 app = ctk.CTk()
 app.geometry("1080x900")
 app.title("yoink")
-
+app.configure(fg_color='#1b2431')
 # YT UI 
 
 yt_title = ctk.CTkLabel(app, text="Insert A Youtube Video/Shorts Link")
