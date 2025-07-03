@@ -3,26 +3,30 @@ import customtkinter as ctk
 import yt_dlp
 import os
 
-def startDownload(platform):
-
+def startDownload():
     # Function to download videos from different platforms
-
+    platform = platform_var.get()
+    link = link_entry.get()
+    
+    if not link:
+        print("Please enter a valid link.")
+        return
+    
+    # Set download path based on platform
     if platform == "YouTube":
-        link = yt_link.get()
         download_path = "C:/coding/mainprojects/yoink/DownloadedItems/YT"
     elif platform == "X":
-        link = x_link.get()
         download_path = "C:/coding/mainprojects/yoink/DownloadedItems/X"
-    elif platform == "NG":
-        link = ng_link.get()
+    elif platform == "Newgrounds":
         download_path = "C:/coding/mainprojects/yoink/DownloadedItems/NG"
     else:
         print("Invalid platform selected.")
         return
-
+    
+    # Create download directory if it doesn't exist
     if not os.path.exists(download_path):
         os.makedirs(download_path)
-
+    
     try:
         download_options = {
             'outtmpl': os.path.join(download_path, '%(title)s.%(ext)s')
@@ -34,62 +38,45 @@ def startDownload(platform):
         print(f"Error: {e}")
 
 # System Settings
-
 ctk.set_appearance_mode("System")
 
 # App Frame
-
 app = ctk.CTk()
-app.geometry("1080x900")
+app.geometry("600x400")
 app.title("yoink")
-app.configure(fg_color='#1b2431')
-# YT UI 
+app.configure(fg_color='#0D1321')
 
-yt_title = ctk.CTkLabel(app, text="Insert A Youtube Video/Shorts Link")
-yt_title.pack(padx=10, pady=50)
+# Title
+title_label = ctk.CTkLabel(app, text="yoink video downloader", font=("Arial", 24, "bold"))
+title_label.pack(padx=10, pady=30)
 
-# YT Link
+# Platform Selection
+platform_label = ctk.CTkLabel(app, text="Select Platform:")
+platform_label.pack(padx=10, pady=10)
 
-yt_url = tk.StringVar()
-yt_link = ctk.CTkEntry(app, width=350, height=40)
-yt_link.pack(padx=10, pady=10)
+platform_var = tk.StringVar(value="YouTube")
+platform_dropdown = ctk.CTkComboBox(app, 
+                                   values=["YouTube", "X", "Newgrounds"],
+                                   variable=platform_var,
+                                   width=200,
+                                   height=32,
+                                   state="readonly")
+platform_dropdown.pack(padx=10, pady=10)
 
-# Download YT Button
-download_yt = ctk.CTkButton(app, text="Download Youtube",  command=lambda: startDownload("YouTube"))
-download_yt.pack(padx=10, pady=10)
+# Link Input
+link_label = ctk.CTkLabel(app, text="Enter Video Link:")
+link_label.pack(padx=10, pady=(20, 5))
 
-# X UI 
+link_entry = ctk.CTkEntry(app, width=400, height=40, placeholder_text="Paste your video link here...")
+link_entry.pack(padx=10, pady=10)
 
-x_title = ctk.CTkLabel(app, text="Insert A X Video Link")
-x_title.pack(padx=10, pady=50)
-
-# X Link
-
-x_url = tk.StringVar()
-x_link = ctk.CTkEntry(app, width=350, height=40)
-x_link.pack(padx=10, pady=10)
-
-# Download X Button
-download_x = ctk.CTkButton(app, text="Download X",  command=lambda: startDownload("X"))
-download_x.pack(padx=10, pady=10)
-
-# NG UI 
-
-ng_title = ctk.CTkLabel(app, text="Insert A Newgrounds Link")
-ng_title.pack(padx=10, pady=50)
-
-# NG Link
-
-ng_url = tk.StringVar()
-ng_link = ctk.CTkEntry(app, width=350, height=40)
-ng_link.pack(padx=10, pady=10)
-
-# Download NG Button
-download_ng = ctk.CTkButton(app, text="Download NG",  command=lambda: startDownload("NG"))
-download_ng.pack(padx=10, pady=10)
+# Download Button
+download_button = ctk.CTkButton(app, 
+                               text="Yoink Video", 
+                               command=startDownload,
+                               width=200,
+                               height=40)
+download_button.pack(padx=10, pady=20)
 
 # Main Loop
-
 app.mainloop()
-
-
