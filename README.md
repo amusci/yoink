@@ -88,16 +88,9 @@ pip install --upgrade customtkinter yt-dlp
 brew install python-tk
 ```
 
-## Notes
-
-- Some platforms may have restrictions on downloadable content
-- Download speeds depend on your internet connection and the source server
-- The application respects the terms of service of each platform
-- Always ensure you have permission to download content
-
 ## License
 
-This project is for educational and personal use. Please respect the terms of service of the platforms you're downloading from and ensure you have the right to download the content.
+This project is for educational and personal use.
 
 ## Contributing
 
@@ -105,4 +98,4 @@ Feel free to submit issues, feature requests, or pull requests to improve the ap
 
 ---
 
-**Disclaimer**: This tool is intended for personal use and downloading content you have permission to access. Users are responsible for complying with applicable laws and platform terms of service.
+**Disclaimer**: This tool is intended for personal use and downloading content you have permission to access.
